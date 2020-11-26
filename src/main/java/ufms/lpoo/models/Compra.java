@@ -18,9 +18,20 @@ public class Compra {
         this.produtos.add(prod);
     }
     public void listarCompra(){
-        //TODO O método listar compra deverá informar o Funcionário que fez a venda e o cliente que fez a compra
+        // O método listar compra deverá informar o Funcionário que fez a venda e o cliente que fez a compra
         // Em seguida, deverá listar todos os produtos comprados pelo cliente
         // Ao final mostrar o valor total da compra.
+
+        double soma = 0;
+        System.out.println("Funcionario: "+getFuncionario());
+        System.out.println("Cliente: "+getCliente());
+        System.out.print("Produtos: ");
+        System.out.println(produtos.toString());
+        for (Produto p: getProdutos()) {
+            soma += p.getValor();
+        }
+        System.out.printf("Total da compra: %.2f", soma);
+
 
     }
 
