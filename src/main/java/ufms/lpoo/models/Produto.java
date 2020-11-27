@@ -1,5 +1,7 @@
 package ufms.lpoo.models;
 
+import java.awt.*;
+
 public class Produto implements Comparable<Produto>{
 
     private String nomeProduto;
@@ -7,9 +9,15 @@ public class Produto implements Comparable<Produto>{
     private Fornecedor empresa;
 
     public Produto(String nomeProduto, float valor, Fornecedor empresa) {
-        this.nomeProduto = nomeProduto;
-        this.valor = valor;
-        this.empresa = empresa;
+
+        try{
+            this.nomeProduto = nomeProduto;
+            this.valor = valor;
+            this.empresa = empresa;
+        } catch (Exception e){
+            System.out.print(e);
+        }
+
     }
 
 

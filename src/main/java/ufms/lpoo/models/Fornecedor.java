@@ -29,7 +29,7 @@ public class Fornecedor implements verificavel {
 
     @Override
     public boolean validar(String cnpj) {
-        String parsedCNPJ = cnpj.replace("-|\\.","");
+        String parsedCNPJ = cnpj.replaceAll("-|\\.|\\/","");
         System.out.println("cnpj sem caracteres: "+parsedCNPJ);
 
         if (parsedCNPJ.equals("00000000000000") || parsedCNPJ.equals("11111111111111") ||
@@ -95,12 +95,19 @@ public class Fornecedor implements verificavel {
 
         Scanner sc = new Scanner(System.in);
         System.out.println("O CNPJ informado é inválido. Informe um novo CNPJ.");
-        String cnpjNovo = sc.nextLine();
 
-        if(validar(cnpjNovo))
-            this.cnpj = cnpjNovo;
-        else
+        try {
+            String cnpjNovo = sc.nextLine();
+
+            if(validar(cnpjNovo))
+                this.cnpj = cnpjNovo;
+            else
+                solicitarNovo();
+        }catch (InputMismatchException e){
+            System.out.println("Você deve inserir um CNPJ no formato ##.###.###/####-## onde # são os números.");
             solicitarNovo();
+        }
+
 
     }
 

@@ -26,7 +26,7 @@ public abstract class Pessoa implements verificavel {
     @Override
     public boolean validar(String cpf) {
 
-        String parsedCPF = cpf.replace("-|\\.","");
+        String parsedCPF = cpf.replaceAll("-|\\.","");
         System.out.println("cpf sem caracteres: "+parsedCPF);
 
         if (parsedCPF.equals("00000000000") ||
@@ -88,12 +88,16 @@ public abstract class Pessoa implements verificavel {
         Scanner sc = new Scanner(System.in);
         System.out.println("O CPF informado é inválido. Informe um novo CPF.");
 
-        String cpfNovo = sc.nextLine();
-        if(validar(cpfNovo))
-            this.cpf = cpfNovo;
-         else
+        try {
+            String cpfNovo = sc.nextLine();
+            if(validar(cpfNovo))
+                this.cpf = cpfNovo;
+            else
+                solicitarNovo();
+        } catch (InputMismatchException e){
+            System.out.print("Você deve inserir um CPF no formato ###.###.###-## onde # são os números.");
             solicitarNovo();
-
+        }
     }
 
     public String getNome() {
