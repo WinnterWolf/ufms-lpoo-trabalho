@@ -29,8 +29,8 @@ public class Produto implements Comparable<Produto>{
     @Override
     public String toString() {
         return
-                "nomeProduto=" + nomeProduto + '\'' +
-                ", valor=" + valor;
+                "nomeProduto= " + nomeProduto + '\'' +
+                ", valor= " + valor;
     }
 
     public String getNomeProduto() {
