@@ -23,6 +23,16 @@ public class Endereco {
         this.cidade = cidade;
     }
 
+    @Override
+    public String toString() {
+        return
+                "rua=" + rua  +
+                ", numero=" + numero +
+                ", bairro=" + bairro  +
+                ", cidade=" + cidade;
+
+    }
+
     public String getRua() {
         return rua;
     }

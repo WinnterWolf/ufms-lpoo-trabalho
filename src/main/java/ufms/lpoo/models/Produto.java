@@ -29,7 +29,7 @@ public class Produto implements Comparable<Produto>{
     @Override
     public String toString() {
         return
-                "nomeProduto= " + nomeProduto + '\'' +
+                "Produto= " + nomeProduto +
                 ", valor= " + valor;
     }
 

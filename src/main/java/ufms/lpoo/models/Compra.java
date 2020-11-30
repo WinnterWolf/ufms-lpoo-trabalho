@@ -1,12 +1,14 @@
 package ufms.lpoo.models;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Compra {
 
     private Funcionario funcionario;
     private Cliente cliente;
-    private List<Produto> produtos;
+    private List<Produto> produtosLista = new ArrayList<>();
 
     public Compra(Funcionario funcionario, Cliente cliente) {
         this.funcionario = funcionario;
@@ -15,15 +17,16 @@ public class Compra {
 
     public void adicionarProduto(Produto prod){
 
-        this.produtos.add(prod);
+        this.produtosLista.add(prod);
     }
     public void listarCompra(){
 
+        Collections.sort(this.produtosLista);//Ordenando em ordem alfabética pelo nome do produto
         double soma = 0;
         System.out.println("Funcionario: "+getFuncionario());
         System.out.println("Cliente: "+getCliente());
         System.out.print("Produtos: ");
-        System.out.println(produtos.toString());
+        System.out.println(produtosLista.toString());
         for (Produto p: getProdutos()) {
             soma += p.getValor();
         }
@@ -49,10 +52,10 @@ public class Compra {
     }
 
     public List<Produto> getProdutos() {
-        return produtos;
+        return produtosLista;
     }
 
     public void setProdutos(List<Produto> produtos) {
-        this.produtos = produtos;
+        this.produtosLista = produtos;
     }
 }
