@@ -30,7 +30,7 @@ public class Fornecedor implements verificavel {
     @Override
     public boolean validar(String cnpj) {
         String parsedCNPJ = cnpj.replaceAll("-|\\.|\\/","");
-        System.out.println("cnpj sem caracteres: "+parsedCNPJ);
+
 
         if (parsedCNPJ.equals("00000000000000") || parsedCNPJ.equals("11111111111111") ||
                 parsedCNPJ.equals("22222222222222") || parsedCNPJ.equals("33333333333333") ||

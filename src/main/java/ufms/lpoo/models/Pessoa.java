@@ -27,7 +27,7 @@ public abstract class Pessoa implements verificavel {
     public boolean validar(String cpf) {
 
         String parsedCPF = cpf.replaceAll("-|\\.","");
-        System.out.println("cpf sem caracteres: "+parsedCPF);
+
 
         if (parsedCPF.equals("00000000000") ||
                 parsedCPF.equals("11111111111") ||
