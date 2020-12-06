@@ -3,12 +3,10 @@ package ufms.lpoo;
 import ufms.lpoo.models.*;
 import ufms.lpoo.resources.Auxiliar;
 
-import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 public class Main {
-
 
 
     static Map<Integer, Endereco> enderecos = new HashMap<>();
@@ -19,14 +17,29 @@ public class Main {
     static List<Compra> compras = new ArrayList<>();
 
 
-    public static void adicionaEndereco(){
+    public static void main(String[] args) {
+        /*TODO nserir pelo menos 6 Enderecos, 2 Funcionarios, 2 Clientes, 2 Fornecedores, 10 Produtos
+       •Inserir pelo menos 2 compras•Listar as Compras*/
+
+        adicionaEndereco();
+        adicionaFuncionario();
+        adicionaCliente();
+        adicionaFornecedor();
+        adicionaProduto();
+        adicionaCompra();
+        listarCompras();
+
+
+    }
+
+    public static void adicionaEndereco() {
         String rua, bairro, cidade, cep, resposta;
         int numero;
         boolean maisUm = true;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Insira um endereço ");
-        while(maisUm){
+        while (maisUm) {
             try {
                 System.out.print("Digite o nome da rua: ");
                 rua = sc.nextLine();
@@ -52,16 +65,16 @@ public class Main {
                 resposta = sc.nextLine();
                 if (resposta.toLowerCase().equals("não") || resposta.toLowerCase().equals("nao"))
                     maisUm = false;
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("insira os dados corretamente.");
-            } catch (NullPointerException n){
+            } catch (NullPointerException n) {
                 System.out.println("Tente novamente");
             }
         }
         System.out.println();
     }
 
-    public static void adicionaFuncionario(){
+    public static void adicionaFuncionario() {
 
         String nome, cpf, celular, resposta, cepFuncionario, funcao, ruaFuncionario;
         Endereco enderecoFuncionario;
@@ -70,7 +83,7 @@ public class Main {
         boolean maisUm = true;
         Scanner sc = new Scanner(System.in);
 
-        while(maisUm){
+        while (maisUm) {
 
             try {
                 System.out.print("Insira um nome: ");
@@ -86,21 +99,21 @@ public class Main {
                 sc.nextLine();
                 System.out.print("Deseja cadastrar um novo Endereço? ");
                 resposta = sc.nextLine();
-                if(resposta.toLowerCase().equals("sim"))
+                if (resposta.toLowerCase().equals("sim"))
                     adicionaEndereco();
                 System.out.print("Deseja escolher o endereço pelo CEP? ");
                 resposta = sc.nextLine();
-                if(resposta.toLowerCase().equals("sim")){
+                if (resposta.toLowerCase().equals("sim")) {
                     System.out.println("Escolha um entre os CEP's cadastrados no sistema a seguir:");
-                    for (Endereco e: enderecos.values()) {
-                        if(e.getCep() != null)
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getCep() != null)
                             System.out.println(e.getCep());
                     }
                     System.out.print("Digite o CEP do funcionario: ");
                     cepFuncionario = sc.nextLine();
-                    boolean achou= false;
-                    for ( Endereco e: enderecos.values()) {
-                        if(e.getCep().equals(cepFuncionario)){
+                    boolean achou = false;
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getCep().equals(cepFuncionario)) {
                             enderecoFuncionario = e;
                             achou = true;
                             Funcionario funcionario = new Funcionario(nome, cpf, enderecoFuncionario, celular, salario, funcao);
@@ -108,19 +121,19 @@ public class Main {
                             break;
                         }
                     }
-                    if(!achou) {
+                    if (!achou) {
                         System.out.println("O Cep informado não foi encontrado. Tente novamente.");
                     }
-                }else {
+                } else {
                     System.out.println("Escolha um entre os endereços cadastrados no sistema a seguir:");
-                    for (Endereco e: enderecos.values()) {
+                    for (Endereco e : enderecos.values()) {
                         System.out.println(e.toString());
                     }
                     System.out.print("Digite o nome da rua do funcionário: ");
                     ruaFuncionario = sc.nextLine();
-                    boolean achou= false;
-                    for ( Endereco e: enderecos.values()) {
-                        if(e.getRua().equals(ruaFuncionario)){
+                    boolean achou = false;
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getRua().equals(ruaFuncionario)) {
                             enderecoFuncionario = e;
                             achou = true;
                             Funcionario funcionario = new Funcionario(nome, ruaFuncionario, enderecoFuncionario, celular, salario, funcao);
@@ -128,7 +141,7 @@ public class Main {
                             break;
                         }
                     }
-                    if(!achou) {
+                    if (!achou) {
                         System.out.println("O endereço informado não foi encontrado. Tente novamente.");
                     }
                 }
@@ -137,16 +150,16 @@ public class Main {
                 if (resposta.toLowerCase().equals("não") || resposta.toLowerCase().equals("nao"))
                     maisUm = false;
                 sc.nextLine();
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("insira os dados corretamente.");
-            } catch (NullPointerException n){
+            } catch (NullPointerException n) {
                 System.out.println("Tente novamente");
             }
         }
         System.out.println();
     }
 
-    public static void adicionaCliente(){
+    public static void adicionaCliente() {
 
         String nome, cpf, celular, resposta, cepCliente;
         Endereco enderecoCliente;
@@ -154,7 +167,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Insira um cliente");
-        while(maisUm){
+        while (maisUm) {
             try {
                 System.out.print("Insira um nome: ");
                 nome = sc.nextLine();
@@ -164,20 +177,21 @@ public class Main {
                 celular = sc.nextLine();
                 System.out.print("Deseja cadastrar um novo Endereço? ");
                 resposta = sc.nextLine();
-                if(resposta.toLowerCase().equals("sim"))
+                if (resposta.toLowerCase().equals("sim"))
                     adicionaEndereco();
                 System.out.print("Deseja escolher o endereço pelo CEP? ");
                 resposta = sc.nextLine();
-                if(resposta.toLowerCase().equals("sim")){
+                if (resposta.toLowerCase().equals("sim")) {
                     System.out.println("Escolha um entre os CEP's cadastrados no sistema a seguir:");
-                    for (Endereco e: enderecos.values()) {
-                        System.out.println(e.getCep());
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getCep() != null)
+                            System.out.println(e.getCep());
                     }
                     System.out.print("Digite o CEP do cliente: ");
                     cepCliente = sc.nextLine();
-                    boolean achou= false;
-                    for ( Endereco e: enderecos.values()) {
-                        if(e.getCep().equals(cepCliente)){
+                    boolean achou = false;
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getCep().equals(cepCliente)) {
                             enderecoCliente = e;
                             achou = true;
                             Cliente cliente = new Cliente(nome, cpf, enderecoCliente, celular);
@@ -185,20 +199,20 @@ public class Main {
                             break;
                         }
                     }
-                    if(!achou) {
+                    if (!achou) {
                         System.out.println("O Cep informado não foi encontrado. Tente novamente.");
                     }
                 } else {
                     String ruaCliente;
                     System.out.println("Escolha um entre os endereços cadastrados no sistema a seguir:");
-                    for (Endereco e: enderecos.values()) {
+                    for (Endereco e : enderecos.values()) {
                         System.out.println(e.toString());
                     }
                     System.out.print("Digite o nome da rua do cliente: ");
                     ruaCliente = sc.nextLine();
-                    boolean achou= false;
-                    for ( Endereco e: enderecos.values()) {
-                        if(e.getRua().equals(ruaCliente)){
+                    boolean achou = false;
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getRua().equals(ruaCliente)) {
                             enderecoCliente = e;
                             achou = true;
                             Cliente cliente = new Cliente(nome, cpf, enderecoCliente, celular);
@@ -206,7 +220,7 @@ public class Main {
                             break;
                         }
                     }
-                    if(!achou) {
+                    if (!achou) {
                         System.out.println("O endereço informado não foi encontrado. Tente novamente.");
                     }
                 }
@@ -214,23 +228,23 @@ public class Main {
                 resposta = sc.nextLine();
                 if (resposta.toLowerCase().equals("não") || resposta.toLowerCase().equals("nao"))
                     maisUm = false;
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("insira os dados corretamente.");
-            } catch (NullPointerException n){
+            } catch (NullPointerException n) {
                 System.out.println("Tente novamente");
             }
         }
         System.out.println();
     }
 
-    public static void adicionaFornecedor(){
+    public static void adicionaFornecedor() {
         String nomeFantasia, cnpj, celular, resposta, cepFornecedor, razaoSocial, ruaFornecedor;
         Endereco enderecoFornecedor;
         boolean maisUm = true;
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Insira um Fornecedor");
-        while(maisUm){
+        while (maisUm) {
             try {
                 System.out.print("Insira o nome fantasia: ");
                 nomeFantasia = sc.nextLine();
@@ -242,20 +256,21 @@ public class Main {
                 celular = sc.nextLine();
                 System.out.print("Deseja cadastrar um novo Endereço? ");
                 resposta = sc.nextLine();
-                if(resposta.toLowerCase().equals("sim"))
+                if (resposta.toLowerCase().equals("sim"))
                     adicionaEndereco();
                 System.out.print("Deseja escolher o endereço pelo CEP? ");
                 resposta = sc.nextLine();
-                if(resposta.toLowerCase().equals("sim")){
+                if (resposta.toLowerCase().equals("sim")) {
                     System.out.println("Escolha um entre os CEP's cadastrados no sistema a seguir:");
-                    for (Endereco e: enderecos.values()) {
-                        System.out.println(e.getCep());
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getCep() != null)
+                            System.out.println(e.getCep());
                     }
                     System.out.print("Digite o CEP do Fornecedor: ");
                     cepFornecedor = sc.nextLine();
-                    boolean achou= false;
-                    for ( Endereco e: enderecos.values()) {
-                        if(e.getCep().equals(cepFornecedor)){
+                    boolean achou = false;
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getCep().equals(cepFornecedor)) {
                             enderecoFornecedor = e;
                             achou = true;
                             Fornecedor fornecedor = new Fornecedor(razaoSocial, nomeFantasia, cnpj, enderecoFornecedor, celular);
@@ -263,19 +278,19 @@ public class Main {
                             break;
                         }
                     }
-                    if(!achou) {
+                    if (!achou) {
                         System.out.println("O Cep informado não foi encontrado. Tente novamente.");
                     }
                 } else {
                     System.out.println("Escolha um entre os endereços cadastrados no sistema a seguir:");
-                    for (Endereco e: enderecos.values()) {
+                    for (Endereco e : enderecos.values()) {
                         System.out.println(e.toString());
                     }
                     System.out.print("Digite o nome da rua do Fornecedor: ");
                     ruaFornecedor = sc.nextLine();
-                    boolean achou= false;
-                    for ( Endereco e: enderecos.values()) {
-                        if(e.getRua().equals(ruaFornecedor)){
+                    boolean achou = false;
+                    for (Endereco e : enderecos.values()) {
+                        if (e.getRua().equals(ruaFornecedor)) {
                             enderecoFornecedor = e;
                             achou = true;
                             Fornecedor fornecedor = new Fornecedor(razaoSocial, nomeFantasia, cnpj, enderecoFornecedor, celular);
@@ -283,7 +298,7 @@ public class Main {
                             break;
                         }
                     }
-                    if(!achou) {
+                    if (!achou) {
                         System.out.println("O endereço informado não foi encontrado. Tente novamente.");
                     }
                 }
@@ -292,15 +307,16 @@ public class Main {
                 if (resposta.toLowerCase().equals("não") || resposta.toLowerCase().equals("nao"))
                     maisUm = false;
                 sc.nextLine();
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("insira os dados corretamente.");
-            } catch (NullPointerException n){
+            } catch (NullPointerException n) {
                 System.out.println("Tente novamente");
             }
         }
         System.out.println();
     }
-    public static void adicionaProduto(){
+
+    public static void adicionaProduto() {
         //String nomeProduto, float valor, Fornecedor empresa
         String nomeProduto, resposta, cnpjFornecedor;
         float valorProduto;
@@ -309,7 +325,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Insira um produto");
-        while(maisUm){
+        while (maisUm) {
             try {
                 System.out.print("Insira o nome do produto: ");
                 nomeProduto = sc.nextLine();
@@ -318,18 +334,18 @@ public class Main {
                 sc.nextLine();
                 System.out.print("Deseja cadastrar um novo Fornecedor? ");
                 resposta = sc.nextLine();
-                if(resposta.toLowerCase().equals("sim"))
+                if (resposta.toLowerCase().equals("sim"))
                     adicionaFornecedor();
 
                 System.out.println("Escolha um entre os CNPJ's cadastrados no sistema a seguir:");
-                for (Fornecedor f: fornecedores) {
+                for (Fornecedor f : fornecedores) {
                     System.out.println(f.getCnpj());
                 }
                 System.out.print("Digite o CNPJ do Fornecedor: ");
                 cnpjFornecedor = sc.nextLine();
-                boolean achou= false;
-                for ( Fornecedor f: fornecedores) {
-                    if(f.getCnpj().equals(cnpjFornecedor)){
+                boolean achou = false;
+                for (Fornecedor f : fornecedores) {
+                    if (f.getCnpj().equals(cnpjFornecedor)) {
                         fornecedorProduto = f;
                         achou = true;
                         Produto produto = new Produto(nomeProduto, valorProduto, fornecedorProduto);
@@ -337,7 +353,7 @@ public class Main {
                         break;
                     }
                 }
-                if(!achou) {
+                if (!achou) {
                     System.out.println("O CNPJ informado não foi encontrado. Tente novamente.");
                 }
 
@@ -346,114 +362,107 @@ public class Main {
                 if (resposta.toLowerCase().equals("não") || resposta.toLowerCase().equals("nao"))
                     maisUm = false;
                 sc.nextLine();
-            } catch (InputMismatchException e){
+            } catch (InputMismatchException e) {
                 System.out.println("insira os dados corretamente.");
-            } catch (NullPointerException n){
+            } catch (NullPointerException n) {
                 System.out.println("Tente novamente");
             }
         }
         System.out.println();
     }
 
-    public static void adicionaCompra(){
+    public static void adicionaCompra() {
         Scanner sc = new Scanner(System.in);
-        String nomeCliente, celularCliente, nomeFuncionario, celularFuncionario, nomeProduto, resposta;
-        Cliente clienteCompra;
-        Funcionario funcionarioVenda;
+        String nomeCliente, nomeFuncionario, nomeProduto, resposta;
+        Cliente clienteCompra = null;
+        Funcionario funcionarioVenda = null;
         boolean maisUmProduto = true;
-        boolean maisUm = true;
 
         System.out.println("Adicione uma compra");
-        while(maisUm) {
-            try {
-                System.out.println("Escolha o cliente através da lista a seguir:");
-                System.out.println(clientes.toString());
-                System.out.print("Digite o nome do cliente da compra: ");
-                nomeCliente = sc.nextLine();
-                System.out.print("Digite o celular do cliente da compra: ");
-                celularCliente = sc.nextLine();
-                for (Cliente c : clientes) {
-                    if ((c.getCelular().equals(celularCliente)) && (c.getNome().equals(nomeCliente))) {
-                        clienteCompra = c;
-                        System.out.println("Escolha o funcionário através da lista a seguir:");
-                        System.out.println(funcionarios.toString());
-                        System.out.print("Digite o nome do funcionário que realizou a venda: ");
-                        nomeFuncionario = sc.nextLine();
-                        for (Funcionario f : funcionarios) {
-                            if (f.getNome().equals(nomeFuncionario)) {
-                                funcionarioVenda = f;
-                                Compra compra = new Compra(funcionarioVenda, clienteCompra);
-                                System.out.println("Escolha os produtos da compra através dos produtos cadastrados");
-                                for (Produto p: produtos) {
-                                    System.out.println(p.toString());
-                                }
-                                while (maisUmProduto) {
 
-                                    System.out.println("Qual o nome do produto que você deseja adicionar a compra?");
-                                    nomeProduto = sc.nextLine();
-                                    boolean achou = false;
-                                    for (Produto prod: produtos) {
-                                        if (prod.getNomeProduto().toLowerCase().equals(nomeProduto.toLowerCase())) {
-                                            compra.adicionarProduto(prod);
-                                            achou = true;
-                                            break;
-                                        }
-                                    }
-                                    if(!achou){
-                                        System.out.println("O produto informado não foi encontrado.");
-                                    }
-                                    System.out.println("Deseja adicionar mais um produto?");
-                                    resposta = sc.nextLine();
-                                    if ((resposta.toLowerCase().equals("nao")) || (resposta.toLowerCase().equals("não"))) {
-                                        maisUmProduto = false;
-                                        compras.add(compra);
-                                    }
-                                }
-                            } else {
-                                System.out.println("O funcionário informado não foi encontrado. tente novamente.");
-                                break;
-                            }
-                        }
-                    } else {
-                        System.out.println("O cliente informado não foi encontrado. tente novamente.");
-                        break;
-                    }
-                }
-            } catch (InputMismatchException e){
-                System.out.println("insira os dados corretamente.");
-//            } catch (NullPointerException n){
-//                System.out.println("Tente novamente");
-//                System.out.println(n);
-            } finally {
-                System.out.print("Deseja adicionar outra compra? ");
-                resposta = sc.nextLine();
-                if ((resposta.toLowerCase().equals("nao")) || (resposta.toLowerCase().equals("não"))){
-                    maisUm = false;
+        try {
+            System.out.println("Escolha o cliente através da lista a seguir:");
+            System.out.println(clientes.toString());
+            System.out.print("Digite o nome do cliente da compra: ");
+            nomeCliente = sc.nextLine();
+            boolean achouFuncionario = false;
+            boolean achouCliente = false;
+            for (Cliente c : clientes) {
+                if (c.getNome().equals(nomeCliente)) {
+                    achouCliente = true;
+                    clienteCompra = new Cliente(c);
                 }
             }
+            if (!(achouCliente)) {
+                System.out.println("O cliente informado não foi encontrado. tente novamente.");
+                throw new InputMismatchException();
+            }
+
+            System.out.println("Escolha o funcionário através da lista a seguir:");
+            System.out.println(funcionarios.toString());
+            System.out.print("Digite o nome do funcionário que realizou a venda: ");
+            nomeFuncionario = sc.nextLine();
+            for (Funcionario f : funcionarios) {
+                if (f.getNome().equals(nomeFuncionario)) {
+                    achouFuncionario = true;
+                    funcionarioVenda = new Funcionario(f);
+                }
+            }
+            if (!(achouFuncionario)) {
+                System.out.println("O funcionário informado não foi encontrado. tente novamente.");
+                throw new InputMismatchException();
+            }
+            if (achouCliente && achouFuncionario) {
+                Compra compra = new Compra(funcionarioVenda, clienteCompra);
+                System.out.println("Escolha os produtos da compra através dos produtos cadastrados");
+                for (Produto p : produtos) {
+                    System.out.println(p.toString());
+                }
+                while (maisUmProduto) {
+
+                    System.out.println("Qual o nome do produto que você deseja adicionar a compra?");
+                    nomeProduto = sc.nextLine();
+                    boolean achou = false;
+                    for (Produto prod : produtos) {
+                        if (prod.getNomeProduto().toLowerCase().equals(nomeProduto.toLowerCase())) {
+                            compra.adicionarProduto(prod);
+                            achou = true;
+                            break;
+                        }
+                    }
+                    if (!achou) {
+                        System.out.println("O produto informado não foi encontrado.");
+                    }
+                    System.out.println("Deseja adicionar mais um produto?");
+                    resposta = sc.nextLine();
+                    if ((resposta.toLowerCase().equals("nao")) || (resposta.toLowerCase().equals("não"))) {
+                        maisUmProduto = false;
+                        compras.add(compra);
+                    }
+                }
+            }
+
+
+        } catch (InputMismatchException e) {
+            System.out.println("insira os dados corretamente.");
+
+        } finally {
+            System.out.print("Deseja adicionar outra compra? ");
+            resposta = sc.nextLine();
+            if (resposta.toLowerCase().equals("sim")) {
+                adicionaCompra();
+            }
         }
+
         System.out.println();
     }
 
-    public static void listarCompras(){
-        for (Compra c: compras) {
+    public static void listarCompras() {
+        for (Compra c : compras) {
             c.listarCompra();
+            System.out.println();
         }
         System.out.println();
     }
 
-    public static void main(String[] args) {
-        /*TODO nserir pelo menos 6 Enderecos, 2 Funcionarios, 2 Clientes, 2 Fornecedores, 10 Produtos
-       •Inserir pelo menos 2 compras•Listar as Compras*/
-
-        adicionaEndereco();
-        adicionaFuncionario();
-        adicionaCliente();
-        adicionaFornecedor();
-        adicionaProduto();
-        adicionaCompra();
-        listarCompras();
-
-
-    }
 }

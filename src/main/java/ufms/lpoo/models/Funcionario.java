@@ -9,6 +9,11 @@ public class Funcionario extends Pessoa{
         this.salario = salario;
         this.funcao = funcao;
     }
+    public Funcionario(Funcionario f) {
+        super(f.getNome(), f.getCpf(), f.getEndereco(), f.getCelular());
+        this.salario = f.getSalario();
+        this.funcao = f.getFuncao();
+    }
 
     @Override
     public String toString() {

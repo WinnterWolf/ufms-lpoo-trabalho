@@ -7,6 +7,9 @@ public class Cliente extends Pessoa{
         super(nome, cpf, endereco, celular);
     }
 
+    public Cliente(Cliente c) {
+        super(c.getNome(), c.getCpf(), c.getEndereco(), c.getCelular());
+    }
     @Override
     public String toString() {
         return "nome= "+getNome()+", celular= "+getCelular();
